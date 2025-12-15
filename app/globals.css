@@ -1,26 +1,31 @@
 @import "tailwindcss";
 
+/* --- CONFIGURAÇÃO DO MODO ESCURO (IMPORTANTE) --- */
+/* Essa linha força o Tailwind a obedecer a classe 'dark' do React */
+/* e ignora a preferência do sistema operacional */
+@variant dark (&:where(.dark, .dark *));
+
+/* --- Variáveis de Tema do Next.js --- */
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+}
+
+/* --- Variáveis CSS Padrão --- */
 :root {
   --background: #ffffff;
   --foreground: #171717;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Cores quando o modo escuro está ativo */
+.dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* Aplicação das variáveis no corpo da página */
 body {
-  background: var(--background);
   color: var(--foreground);
+  background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
