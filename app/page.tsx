@@ -195,8 +195,8 @@ export default function CleanPortfolio() {
                                                 <Play size={20} fill="currentColor" />
                                             </div>
                                             <div>
-                                                <h3 className="font-bold text-slate-900 dark:text-white">Último Vídeo</h3>
-                                                <p className="text-xs text-slate-500 dark:text-slate-400">Acompanhe meus estudos recentes</p>
+
+                                                <p className="text-xs text-slate-500 dark:text-slate-400">No meu canal, eu exploro o ecossistema Java e Spring Boot a fundo, traduzindo conceitos complexos de backend, microsserviços e cloud para aplicações do mundo real.</p>
                                             </div>
                                         </div>
 
