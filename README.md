@@ -1,36 +1,38 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 👨‍💻 Portfólio Profissional - Davidson Linhares
 
-## Getting Started
+## 📖 Sobre o Projeto
 
-First, run the development server:
+Este projeto é o meu portfólio pessoal, projetado para apresentar minha jornada como **Engenheiro de Software Backend** (Especialista em Java/Spring) e meus projetos Full Stack.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+O objetivo foi criar uma aplicação que não apenas mostrasse minhas informações, mas que também demonstrasse domínio sobre **Clean Code**, **Componentização** e **UX/UI moderna**.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Tecnologias Utilizadas
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+O projeto foi construído utilizando as versões mais atuais das ferramentas de mercado:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+-   **[Next.js 15](https://nextjs.org/)** (App Router & Server Components)
+-   **[TypeScript](https://www.typescriptlang.org/)** (Tipagem estática rigorosa)
+-   **[Tailwind CSS v4](https://tailwindcss.com/)** (Estilização Utility-first)
+-   **[Framer Motion](https://www.framer.com/motion/)** (Animações fluidas e gestos)
+-   **[Lucide React](https://lucide.dev/)** (Ícones leves e consistentes)
 
-## Learn More
+## ✨ Funcionalidades Principais
 
-To learn more about Next.js, take a look at the following resources:
+-   🌗 **Dark/Light Mode Inteligente**: Detecta a preferência do sistema operacional e permite alternância manual, persistindo a escolha.
+-   🎢 **Infinite Tech Marquee**: Um carrossel infinito animado ("Glassmorphism") para exibir a stack tecnológica.
+-   📱 **Totalmente Responsivo**: Layout fluido que se adapta perfeitamente de celulares a monitores ultrawide.
+-   📄 **Dados Estruturados**: Todo o conteúdo (Experiência, Educação, Skills) é separado em arquivos de dados (`src/data/resume.ts`), facilitando a manutenção.
+-   ⚡ **SEO Otimizado**: Metadados configurados, Open Graph para redes sociais e estrutura semântica.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📂 Estrutura do Projeto
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+A arquitetura foi pensada para ser modular e escalável:
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```text
+/src
+  ├── app/            # Páginas e Layouts (App Router)
+  ├── components/     # Componentes Reutilizáveis (Hero, Cards, Carousel...)
+  ├── data/           # Fonte única de verdade dos dados (Resume Data)
+  ├── public/         # Assets estáticos (Imagens, Logos, PDF)
+  ├── types/          # Definições de Tipos TypeScript (Interfaces)
+               
