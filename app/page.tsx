@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { Download, Moon, Sun, Briefcase, Code, GraduationCap, Globe } from 'lucide-react';
+import { Download, Moon, Sun, Briefcase, Code, GraduationCap, Globe, Users, Play, Youtube } from 'lucide-react'; // Adicionei Youtube de volta aqui
 import { motion, useScroll, useSpring } from 'framer-motion';
 
 // Importando componentes refatorados
@@ -10,6 +10,7 @@ import { SkillBar } from '@/components/SkillBar';
 import { ExperienceCard } from '@/components/ExperienceCard';
 import { HeroSection } from '@/components/HeroSection';
 import { TechCarousel } from '@/components/TechCarousel';
+// Removi o import do VideoPlayer pois vamos integrá-lo diretamente
 
 export default function CleanPortfolio() {
     const [darkMode, setDarkMode] = useState<boolean>(false);
@@ -23,23 +24,20 @@ export default function CleanPortfolio() {
     });
 
     useEffect(() => {
-        // 1. Define a media query
         const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-
-        // 2. Função segura para atualizar o estado sem causar loops
         const handleChange = () => setDarkMode(mediaQuery.matches);
-
-        // 3. Define o valor inicial apenas uma vez ao montar
         handleChange();
-
-        // 4. Adiciona um "ouvinte" para caso você mude o tema do Windows/Mac com o site aberto
         mediaQuery.addEventListener('change', handleChange);
-
-        // 5. Limpeza de memória (boas práticas)
         return () => mediaQuery.removeEventListener('change', handleChange);
     }, []);
 
     const toggleTheme = () => setDarkMode(!darkMode);
+
+    // Dados do vídeo em destaque
+    const featuredVideo = {
+        id: "dmeQVVixBOw",
+        title: "Java ☕, Python ⚙️ & IA 🤖 — Arquiteturas Modernas com Spring Boot"
+    };
 
     return (
         <div className={darkMode ? 'dark' : ''}>
@@ -55,22 +53,16 @@ export default function CleanPortfolio() {
                 <nav className="sticky top-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
                     <div className="container mx-auto px-6 h-16 flex items-center justify-between max-w-5xl">
                         <div className="font-bold text-xl tracking-tight text-slate-900 dark:text-white flex items-center gap-2">
-
-                            {/* --- ALTERAÇÃO 1: LOGO NO HEADER --- */}
-                            {/* Certifique-se de ter um arquivo 'logo.png' na pasta /public */}
                             <img
                                 src="/logo.png"
                                 alt="Logo"
                                 className="w-8 h-8 md:w-10 md:h-10 object-contain"
                                 onError={(e) => {
-                                    // Fallback caso a imagem não carregue: volta a ser o quadrado azul
                                     e.currentTarget.style.display = 'none';
                                     e.currentTarget.nextElementSibling?.classList.remove('hidden');
                                 }}
                             />
-                            {/* Fallback visual (Quadrado DL) caso a imagem falhe ou não exista */}
                             <div className="hidden w-8 h-8 bg-indigo-600 rounded-lg items-center justify-center text-white font-mono">DL</div>
-
                             <span className="hidden sm:block">{resumeData.name}</span>
                         </div>
 
@@ -97,13 +89,11 @@ export default function CleanPortfolio() {
 
                 <main className="relative z-10">
                     <HeroSection darkMode={darkMode} />
-
-                    {/* Carrossel de Tecnologias */}
                     <TechCarousel />
 
                     <div className="container mx-auto px-6 max-w-5xl mt-20">
 
-                        {/* Stats Rápidos (Já atualizados com seus dados reais) */}
+                        {/* Stats Rápidos */}
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
@@ -153,7 +143,7 @@ export default function CleanPortfolio() {
                                 </div>
                             </section>
 
-                            {/* --- ALTERAÇÃO 2: FORMAÇÃO ACADÊMICA COM LOGOS --- */}
+                            {/* Formação Acadêmica */}
                             <section>
                                 <div className="flex items-center gap-3 mb-8">
                                     <div className="p-2 bg-indigo-100 dark:bg-indigo-900/30 rounded-lg text-indigo-600 dark:text-indigo-400">
@@ -164,32 +154,18 @@ export default function CleanPortfolio() {
                                 <div className="space-y-4">
                                     {resumeData.education.map((edu, idx) => (
                                         <div key={idx} className="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm flex items-start gap-4">
-                                            {/* Lógica para exibir o Logo da Faculdade se existir */}
                                             {edu.logo && (
                                                 <div className="w-12 h-12 flex-shrink-0 rounded-lg bg-white p-1 border border-slate-100 dark:border-slate-700 flex items-center justify-center overflow-hidden">
-                                                    <img
-                                                        src={edu.logo}
-                                                        alt={edu.school}
-                                                        className="w-full h-full object-contain"
-                                                    />
+                                                    <img src={edu.logo} alt={edu.school} className="w-full h-full object-contain" />
                                                 </div>
                                             )}
-
-                                            {/* Textos */}
                                             <div>
-                                                <h3 className="text-lg font-bold text-slate-900 dark:text-white leading-tight">
-                                                    {edu.course}
-                                                </h3>
-                                                <p className="text-slate-600 dark:text-slate-300 mt-1">
-                                                    {edu.school}
-                                                </p>
-                                                <span className="text-sm text-indigo-600 dark:text-indigo-400 mt-2 block font-medium">
-                            {edu.period}
-                          </span>
+                                                <h3 className="text-lg font-bold text-slate-900 dark:text-white leading-tight">{edu.course}</h3>
+                                                <p className="text-slate-600 dark:text-slate-300 mt-1">{edu.school}</p>
+                                                <span className="text-sm text-indigo-600 dark:text-indigo-400 mt-2 block font-medium">{edu.period}</span>
                                             </div>
                                         </div>
                                     ))}
-
                                     <div className="bg-indigo-600 p-6 rounded-2xl text-white shadow-lg mt-6">
                                         <h3 className="font-bold mb-2 flex items-center gap-2"><Globe size={18}/> Interesses</h3>
                                         <p className="text-sm text-indigo-100">Clean Architecture, Observabilidade, DevOps, Cloud Native.</p>
@@ -197,6 +173,64 @@ export default function CleanPortfolio() {
                                 </div>
                             </section>
                         </div>
+
+                        {/* --- SEÇÃO COMUNIDADE UNIFICADA --- */}
+                        <section className="mb-20">
+                            {/* Título da Seção */}
+                            <div className="flex items-center gap-3 mb-8">
+                                <div className="p-2 bg-indigo-100 dark:bg-indigo-900/30 rounded-lg text-indigo-600 dark:text-indigo-400">
+                                    <Users size={24} />
+                                </div>
+                                <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Comunidade</h2>
+                            </div>
+
+                            <div className="flex flex-col gap-6">
+
+                                {/* 1. BLOCO DO VÍDEO (Integrado) */}
+                                <div className="w-full bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 p-6 shadow-sm">
+                                    {/* CABEÇALHO DO VÍDEO */}
+                                    <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-4">
+                                        <div className="flex items-center gap-3">
+                                            <div className="p-2 bg-red-100 dark:bg-red-900/20 rounded-lg text-red-600 dark:text-red-500">
+                                                <Play size={20} fill="currentColor" />
+                                            </div>
+                                            <div>
+                                                <h3 className="font-bold text-slate-900 dark:text-white">Último Vídeo</h3>
+                                                <p className="text-xs text-slate-500 dark:text-slate-400">Acompanhe meus estudos recentes</p>
+                                            </div>
+                                        </div>
+
+                                        {/* Botão de Inscrição - Estilo unificado (Vermelho Sólido sempre) */}
+                                        <a
+                                            href="https://www.youtube.com/@DavJaveiro?sub_confirmation=1"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="text-xs font-bold text-white bg-red-600 hover:bg-red-700 py-2 px-4 rounded-lg text-center transition-colors shadow-sm w-full sm:w-auto"
+                                        >
+                                            Inscrever-se
+                                        </a>
+                                    </div>
+
+                                    {/* Player */}
+                                    <div className="relative w-full aspect-video rounded-xl overflow-hidden bg-slate-900 shadow-lg border-2 border-slate-100 dark:border-slate-700">
+                                        <iframe
+                                            className="w-full h-full"
+                                            src={`https://www.youtube.com/embed/${featuredVideo.id}`}
+                                            title={featuredVideo.title}
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                            allowFullScreen
+                                        ></iframe>
+                                    </div>
+
+                                    <h4 className="mt-4 font-semibold text-slate-900 dark:text-white text-base leading-tight">
+                                        {featuredVideo.title}
+                                    </h4>
+                                </div>
+
+
+
+                            </div>
+                        </section>
 
                         {/* Footer */}
                         <footer className="border-t border-slate-200 dark:border-slate-800 pt-8 pb-12 text-center md:text-left text-slate-500 text-sm flex flex-col md:flex-row justify-between items-center">
