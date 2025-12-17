@@ -10,7 +10,7 @@ export const resumeData: ResumeData = {
     linkedin: "https://www.linkedin.com/in/davidson-linhares",
     github: "https://github.com/DavJaveiro"
   },
-  summary: "Sou Desenvolvedor Backend Java focado em criar soluções estáveis, escaláveis e preparadas para ambientes de produção modernos. Tenho experiência com Spring Boot, APIs REST, microsserviços, bancos relacionais e práticas essenciais de DevOps. Atualmente, estou ampliando minhas competências em Cloud Computing (AWS) e Terraform.",
+  summary: "Sou Desenvolvedor Backend Java focado em criar soluções estáveis, escaláveis e preparadas para ambientes de produção. Tenho experiência com o ecossistema Spring Framework, APIs REST, microsserviços, bancos de dados relacionais e práticas essenciais de DevOps. Atualmente, estou ampliando minhas competências em Cloud Computing (AWS) e Terraform.",
   skills: [
     { name: 'Java / Spring Boot', level: 95 },
     { name: 'APIs REST / Microservices', level: 90 },
