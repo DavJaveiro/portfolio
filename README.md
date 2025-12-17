@@ -1,8 +1,8 @@
-# 👨‍💻 Portfólio Profissional — Davidson Linhares
+# Portfólio Profissional | Davidson Linhares
 
-## 📖 Sobre o Projeto
+## Sobre o Projeto
 
-Este projeto é o meu **portfólio profissional**, desenvolvido para apresentar minha trajetória como **Engenheiro de Software Backend (Java / Spring)**, além de projetos Full Stack e estudos contínuos em engenharia de software.
+Este projeto é o meu **portfólio profissional**, desenvolvido para apresentar minha trajetória como **Engenheiro de Software Backend (Java / Spring)**, além de projetos Full Stack e estudos contínuos dentro da área de engenharia de software.
 
 Mais do que um site institucional, o portfólio foi pensado como um **produto real**, integrando **frontend moderno** com um **microserviço backend próprio**, demonstrando domínio em:
 
@@ -14,16 +14,16 @@ Mais do que um site institucional, o portfólio foi pensado como um **produto re
 
 ---
 
-## 🧩 Arquitetura Geral
+## Arquitetura Geral
 
 A aplicação é composta por **duas partes bem definidas**:
 
-### 🔹 Frontend (Portfólio)
+### Frontend (Portfólio)
 
 * Responsável pela interface, experiência do usuário e exibição dos dados
 * Desenvolvido com **Next.js** e tecnologias modernas de UI
 
-### 🔹 Backend (Microserviço API)
+### Backend (Microserviço API)
 
 * **API REST em Java com Spring Boot**
 * Hospedada em uma **instância EC2 na AWS**
@@ -32,13 +32,13 @@ A aplicação é composta por **duas partes bem definidas**:
 * Secrets gerenciados via **variáveis de ambiente**
 * Acesso restrito via **CORS configurado**
 
-➡️ O frontend consome essa API para manter o conteúdo do portfólio sempre atualizado, sem expor credenciais sensíveis.
+O frontend consome essa API para manter o conteúdo do portfólio sempre atualizado, sem expor credenciais sensíveis.
 
 ---
 
-## 🚀 Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
-### 🖥️ Frontend
+### Frontend
 
 * **Next.js 15** (App Router & Server Components)
 * **TypeScript**
@@ -46,7 +46,7 @@ A aplicação é composta por **duas partes bem definidas**:
 * **Framer Motion**
 * **Lucide React**
 
-### ⚙️ Backend (Microserviço)
+### Backend (Microserviço)
 
 * **Java 21**
 * **Spring Boot 3**
@@ -58,19 +58,19 @@ A aplicação é composta por **duas partes bem definidas**:
 
 ---
 
-## ✨ Funcionalidades Principais
+## Funcionalidades Principais
 
-* 🌗 Dark / Light Mode inteligente
-* 🎢 Carrossel infinito de tecnologias
-* 📱 Design totalmente responsivo
-* 📄 Dados centralizados e fáceis de manter
-* 🎥 Integração com microserviço backend real
-* 🔐 Secrets nunca expostos no frontend ou no repositório
-* ⚡ SEO otimizado
+*  Dark / Light Mode inteligente
+*  Carrossel infinito de tecnologias
+*  Design totalmente responsivo
+*  Dados centralizados e fáceis de manter
+*  Integração com microserviço backend real
+*  Secrets nunca expostos no frontend ou no repositório
+*  SEO otimizado
 
 ---
 
-## 📂 Estrutura do Projeto — Frontend
+##  Estrutura do Projeto — Frontend
 
 ```text
 /src
@@ -83,7 +83,7 @@ A aplicação é composta por **duas partes bem definidas**:
 
 ---
 
-## 📂 Estrutura do Projeto — Backend (Microserviço YouTube API)
+## Estrutura do Projeto — Backend (Microserviço YouTube API)
 
 O backend segue uma **arquitetura em camadas**, separando claramente responsabilidades:
 
@@ -104,7 +104,7 @@ src/main/java/br/com/youtubeapi/youtubeapi
  └── YouTubeApiApplication.java      # Classe principal (bootstrap)
 ```
 
-### 📌 Organização por responsabilidade
+### Organização por responsabilidade
 
 * **Controller**
   Responsável apenas por lidar com requisições HTTP e respostas.
@@ -122,7 +122,7 @@ Essa estrutura torna o projeto **escalável, testável e fácil de evoluir**.
 
 ---
 
-## ☁️ Backend & Deploy
+## Backend & Deploy
 
 * Microserviço executando em **EC2 (AWS)**
 * Aplicação empacotada como **JAR Spring Boot**
@@ -132,7 +132,7 @@ Essa estrutura torna o projeto **escalável, testável e fácil de evoluir**.
 
 ---
 
-## 🎯 Objetivo do Projeto
+## Objetivo do Projeto
 
 Demonstrar, na prática:
 
@@ -141,3 +141,5 @@ Demonstrar, na prática:
 * Conhecimento em **Java, Spring, Cloud e Deploy**
 * Aplicação de **boas práticas de arquitetura**
 
+## Acesse em:
+https://davjaveiro-portfolio.vercel.app/
