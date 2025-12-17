@@ -169,7 +169,7 @@ export default function CleanPortfolio() {
                         <button
                             key={item.id}
                             onClick={() => scrollToSection(item.id)}
-                            className={`flex flex-col items-center justify-center w-full h-full gap-1 transition-colors relative ${
+                            className={`flex flex-col items-center justify-end w-full h-full gap-1 transition-colors relative pb-3${
                                 activeSection === item.id
                                     ? 'text-indigo-600 dark:text-indigo-400'
                                     : 'text-slate-400 dark:text-slate-500'
@@ -181,7 +181,10 @@ export default function CleanPortfolio() {
                                     className="absolute top-0 w-8 h-1 bg-indigo-600 rounded-b-full"
                                 />
                             )}
-                            <item.icon size={20} strokeWidth={activeSection === item.id ? 2.5 : 2} />
+
+                            <div className="mt-2">
+                                <item.icon size={20} strokeWidth={activeSection === item.id ? 2.5 : 2} />
+                            </div>
                             <span className="text-[10px] font-medium">{item.label}</span>
                         </button>
                     ))}
