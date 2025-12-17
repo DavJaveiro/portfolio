@@ -1,11 +1,10 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { Download, Moon, Sun, Briefcase, Code, GraduationCap, Globe, Users, Play, Youtube, LayoutGrid, Mail } from 'lucide-react';
+import { Download, Moon, Sun, Briefcase, Code, GraduationCap, Globe, Users, Play, Youtube, LayoutGrid, Mail, Server, Database, Cloud, AppWindow } from 'lucide-react';
 import { motion, useScroll, useSpring, AnimatePresence } from 'framer-motion';
 
 import { resumeData } from '@/data/resume';
-import { SkillBar } from '@/components/SkillBar';
 import { ExperienceCard } from '@/components/ExperienceCard';
 import { HeroSection } from '@/components/HeroSection';
 import { TechCarousel } from '@/components/TechCarousel';
@@ -34,6 +33,29 @@ export default function CleanPortfolio() {
         { id: 'stack', icon: Code, label: 'Stack' },
         { id: 'education', icon: GraduationCap, label: 'Formação' },
         { id: 'community', icon: Users, label: 'Canal' },
+    ];
+
+    const techStack = [
+        {
+            category: "Backend & Core",
+            icon: Server,
+            skills: ["Java", "Spring Framework", "RESTfull APIS"]
+        },
+        {
+            category: "Banco de Dados",
+            icon: Database,
+            skills: ["PostgreSQL", "SQL", "JPA / Hibernate", "Redis"]
+        },
+        {
+            category: "DevOps & Cloud",
+            icon: Cloud,
+            skills: ["AWS (EC2/S3)", "Docker", "CI/CD", "Terraform", "Linux"]
+        },
+        {
+            category: "Frontend & Web",
+            icon: AppWindow,
+            skills: ["Angular", "TypeScript", "Next.js", "Tailwind CSS"]
+        }
     ];
 
     useEffect(() => {
@@ -95,13 +117,12 @@ export default function CleanPortfolio() {
         const element = document.getElementById(id);
         if (element) {
             window.scrollTo({
-                top: element.offsetTop - 40, // Ajuste fino já que não tem mais header
+                top: element.offsetTop - 40,
                 behavior: 'smooth'
             });
         }
     };
 
-    // --- SIDEBAR DESKTOP ---
     const SidebarNav = () => (
         <nav className="hidden xl:flex fixed right-8 top-1/2 -translate-y-1/2 z-40 flex-col gap-3 p-4 rounded-2xl bg-white/50 dark:bg-slate-900/50 backdrop-blur-md border border-slate-200 dark:border-slate-800 shadow-lg w-16 items-center transition-all hover:w-48 group overflow-hidden">
             {navItems.map((item) => (
@@ -126,10 +147,8 @@ export default function CleanPortfolio() {
                 </button>
             ))}
 
-            {/* Separador */}
             <div className="w-full h-px bg-slate-200 dark:bg-slate-700 my-1" />
 
-            {/* Botão de Tema */}
             <button
                 onClick={toggleTheme}
                 className="flex items-center gap-3 w-full p-2 rounded-xl transition-all text-slate-400 hover:text-amber-500 hover:bg-amber-50 dark:hover:bg-amber-900/20 relative"
@@ -142,7 +161,6 @@ export default function CleanPortfolio() {
                 </span>
             </button>
 
-            {/* Botão de CV */}
             <a
                 href="/davidson_linhares.pdf"
                 download
@@ -158,18 +176,16 @@ export default function CleanPortfolio() {
         </nav>
     );
 
-    // --- NAVBAR MOBILE ---
+    // NAVBAR MOBILE
     const MobileNav = () => (
         <nav className="fixed bottom-0 left-0 right-0 z-50 bg-white/90 dark:bg-slate-950/90 backdrop-blur-lg border-t border-slate-200 dark:border-slate-800 xl:hidden pb-safe">
             <div className="flex justify-between items-center h-16 px-4">
-
-                {/* Links de Navegação */}
                 <div className="flex justify-around flex-1">
                     {navItems.map((item) => (
                         <button
                             key={item.id}
                             onClick={() => scrollToSection(item.id)}
-                            className={`flex flex-col items-center justify-end w-full h-full gap-1 transition-colors relative pb-3${
+                            className={`flex flex-col items-center justify-end w-full h-full gap-1 transition-colors relative pb-3 ${
                                 activeSection === item.id
                                     ? 'text-indigo-600 dark:text-indigo-400'
                                     : 'text-slate-400 dark:text-slate-500'
@@ -181,7 +197,6 @@ export default function CleanPortfolio() {
                                     className="absolute top-0 w-8 h-1 bg-indigo-600 rounded-b-full"
                                 />
                             )}
-
                             <div className="mt-2">
                                 <item.icon size={20} strokeWidth={activeSection === item.id ? 2.5 : 2} />
                             </div>
@@ -189,20 +204,15 @@ export default function CleanPortfolio() {
                         </button>
                     ))}
                 </div>
-
-                {/* Divisória Vertical */}
                 <div className="h-8 w-px bg-slate-200 dark:bg-slate-700 mx-2"></div>
-
-                {/* Ações Extras (Tema e CV) */}
                 <div className="flex gap-3 items-center pl-1">
-                    <button onClick={toggleTheme} className="text-slate-400 hover:text-amber-500 transition-colors">
+                    <button onClick={toggleTheme} className="text-slate-400 hover:text-amber-500 transition-colors p-1">
                         {darkMode ? <Sun size={20} /> : <Moon size={20} />}
                     </button>
-                    <a href="/davidson_linhares.pdf" download className="text-slate-400 hover:text-emerald-500 transition-colors">
+                    <a href="/davidson_linhares.pdf" download className="text-slate-400 hover:text-emerald-500 transition-colors p-1">
                         <Download size={20} />
                     </a>
                 </div>
-
             </div>
         </nav>
     );
@@ -216,7 +226,6 @@ export default function CleanPortfolio() {
                 <SidebarNav />
                 <MobileNav />
 
-                {/* Botão Flutuante de Email */}
                 <AnimatePresence>
                     {showEmailBtn && (
                         <motion.a
@@ -234,7 +243,7 @@ export default function CleanPortfolio() {
                     )}
                 </AnimatePresence>
 
-                <main className="relative z-10 pt-10 md:pt-0"> {/* Pequeno padding top no mobile pois removemos o header */}
+                <main className="relative z-10 pt-10 md:pt-0">
                     <div id="home">
                         <HeroSection darkMode={darkMode} />
                         <TechCarousel />
@@ -266,41 +275,58 @@ export default function CleanPortfolio() {
                             </div>
                         </section>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-20">
-                            <section id="stack" className="scroll-mt-24">
-                                <div className="flex items-center gap-3 mb-8">
-                                    <div className="p-2 bg-indigo-100 dark:bg-indigo-900/30 rounded-lg text-indigo-600 dark:text-indigo-400"><Code size={24} /></div>
-                                    <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Stack Tecnológica</h2>
-                                </div>
-                                <div className="bg-white dark:bg-slate-800 p-8 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm">
-                                    {resumeData.skills.map((skill, index) => <SkillBar key={index} skill={skill} delay={index} />)}
-                                </div>
-                            </section>
-                            <section id="education" className="scroll-mt-24">
-                                <div className="flex items-center gap-3 mb-8">
-                                    <div className="p-2 bg-indigo-100 dark:bg-indigo-900/30 rounded-lg text-indigo-600 dark:text-indigo-400"><GraduationCap size={24} /></div>
-                                    <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Formação Acadêmica</h2>
-                                </div>
-                                <div className="space-y-4">
-                                    {resumeData.education.map((edu, idx) => (
-                                        <div key={idx} className="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm flex items-start gap-4">
-                                            {edu.logo && <div className="w-12 h-12 flex-shrink-0 rounded-lg bg-white p-1 border border-slate-100 dark:border-slate-700 flex items-center justify-center overflow-hidden"><img src={edu.logo} alt={edu.school} className="w-full h-full object-contain" /></div>}
-                                            <div>
-                                                <h3 className="text-lg font-bold text-slate-900 dark:text-white leading-tight">{edu.course}</h3>
-                                                <p className="text-slate-600 dark:text-slate-300 mt-1">{edu.school}</p>
-                                                <span className="text-sm text-indigo-600 dark:text-indigo-400 mt-2 block font-medium">{edu.period}</span>
-                                            </div>
-                                        </div>
-                                    ))}
-                                    <div className="bg-indigo-600 p-6 rounded-2xl text-white shadow-lg mt-6">
-                                        <h3 className="font-bold mb-2 flex items-center gap-2"><Globe size={18}/> Interesses</h3>
-                                        <p className="text-sm text-indigo-100">Clean Architecture, Observabilidade, DevOps, Cloud Native.</p>
-                                    </div>
-                                </div>
-                            </section>
-                        </div>
 
-                        {/* Comunidade */}
+                        <section id="stack" className="mb-20 scroll-mt-24">
+                            <div className="flex items-center gap-3 mb-8">
+                                <div className="p-2 bg-indigo-100 dark:bg-indigo-900/30 rounded-lg text-indigo-600 dark:text-indigo-400"><Code size={24} /></div>
+                                <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Stack Tecnológica</h2>
+                            </div>
+
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                {techStack.map((group, idx) => (
+                                    <div key={idx} className="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow">
+                                        <div className="flex items-center gap-3 mb-4">
+                                            <div className="p-2 bg-slate-50 dark:bg-slate-700/30 rounded-lg text-indigo-600 dark:text-indigo-400">
+                                                <group.icon size={20} />
+                                            </div>
+                                            <h3 className="font-bold text-slate-900 dark:text-white">{group.category}</h3>
+                                        </div>
+                                        <div className="flex flex-wrap gap-2">
+                                            {group.skills.map((skill, skillIdx) => (
+                                                <span
+                                                    key={skillIdx}
+                                                    className="px-3 py-1.5 bg-slate-100 dark:bg-slate-700/50 text-slate-700 dark:text-slate-200 text-xs font-medium rounded-lg border border-slate-200 dark:border-slate-600 cursor-default hover:border-indigo-400 dark:hover:border-indigo-500 transition-colors"
+                                                >
+                                                    {skill}
+                                                </span>
+                                            ))}
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </section>
+
+                        {/* Formação Acadêmica */}
+                        <section id="education" className="mb-20 scroll-mt-24">
+                            <div className="flex items-center gap-3 mb-8">
+                                <div className="p-2 bg-indigo-100 dark:bg-indigo-900/30 rounded-lg text-indigo-600 dark:text-indigo-400"><GraduationCap size={24} /></div>
+                                <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Formação Acadêmica</h2>
+                            </div>
+                            <div className="space-y-4">
+                                {resumeData.education.map((edu, idx) => (
+                                    <div key={idx} className="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm flex items-start gap-4">
+                                        {edu.logo && <div className="w-12 h-12 flex-shrink-0 rounded-lg bg-white p-1 border border-slate-100 dark:border-slate-700 flex items-center justify-center overflow-hidden"><img src={edu.logo} alt={edu.school} className="w-full h-full object-contain" /></div>}
+                                        <div>
+                                            <h3 className="text-lg font-bold text-slate-900 dark:text-white leading-tight">{edu.course}</h3>
+                                            <p className="text-slate-600 dark:text-slate-300 mt-1">{edu.school}</p>
+                                            <span className="text-sm text-indigo-600 dark:text-indigo-400 mt-2 block font-medium">{edu.period}</span>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </section>
+
+                        {/* Comunidade (MANTIDA ORIGINALMENTE) */}
                         <section id="community" className="mb-20 scroll-mt-24">
                             <div className="flex items-center gap-3 mb-8">
                                 <div className="p-2 bg-indigo-100 dark:bg-indigo-900/30 rounded-lg text-indigo-600 dark:text-indigo-400"><Users size={24} /></div>
@@ -308,7 +334,6 @@ export default function CleanPortfolio() {
                             </div>
 
                             <div className="flex flex-col gap-6">
-                                {/* VIDEO PLAYER INTEGRADO */}
                                 <div className="w-full bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 p-6 shadow-sm">
                                     <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-4">
                                         <div className="flex items-center gap-3">
@@ -321,14 +346,11 @@ export default function CleanPortfolio() {
                                         <a href="https://www.youtube.com/@DavJaveiro?sub_confirmation=1" target="_blank" rel="noopener noreferrer" className="text-xs font-bold text-white bg-red-600 hover:bg-red-700 py-2 px-4 rounded-lg text-center transition-colors shadow-sm w-full sm:w-auto">Inscrever-se</a>
                                     </div>
 
-                                    {/* O ID aqui vem do backend Java via API Route */}
                                     <div className="relative w-full aspect-video rounded-xl overflow-hidden bg-slate-900 shadow-lg border-2 border-slate-100 dark:border-slate-700">
                                         <iframe className="w-full h-full" src={`https://www.youtube.com/embed/${featuredVideo.id}`} title={featuredVideo.title} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
                                     </div>
                                     <h4 className="mt-4 font-semibold text-slate-900 dark:text-white text-base leading-tight">{featuredVideo.title}</h4>
                                 </div>
-
-
                             </div>
                         </section>
 
