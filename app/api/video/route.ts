@@ -6,8 +6,7 @@ export async function GET() {
     try {
         // O servidor do Next.js chama o Java (Servidor -> Servidor não tem bloqueio HTTP)
         const response = await fetch(JAVA_API_URL, {
-            cache: 'no-store', // Garante dados sempre frescos
-            next: { revalidate: 0 }
+            next: { revalidate: 3600 }
         });
 
         if (!response.ok) {
