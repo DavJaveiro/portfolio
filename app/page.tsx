@@ -1,17 +1,15 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { Download, Moon, Sun, Briefcase, Code, GraduationCap, Globe, Users, Play, Youtube } from 'lucide-react';
-import { motion, useScroll, useSpring } from 'framer-motion';
+import { Download, Moon, Sun, Briefcase, Code, GraduationCap, Globe, Users, Play, Youtube, LayoutGrid, Mail } from 'lucide-react';
+import { motion, useScroll, useSpring, AnimatePresence } from 'framer-motion';
 
-// Importando componentes
 import { resumeData } from '@/data/resume';
 import { SkillBar } from '@/components/SkillBar';
 import { ExperienceCard } from '@/components/ExperienceCard';
 import { HeroSection } from '@/components/HeroSection';
 import { TechCarousel } from '@/components/TechCarousel';
 
-// Interface do vídeo
 interface VideoData {
     id: string;
     title: string;
@@ -19,8 +17,9 @@ interface VideoData {
 
 export default function CleanPortfolio() {
     const [darkMode, setDarkMode] = useState<boolean>(false);
+    const [activeSection, setActiveSection] = useState<string>('home');
+    const [showEmailBtn, setShowEmailBtn] = useState(false);
 
-    // Estado inicial (Fallback caso a API demore ou falhe)
     const [featuredVideo, setFeaturedVideo] = useState<VideoData>({
         id: "dmeQVVixBOw",
         title: "Java ☕, Python ⚙️ & IA 🤖 — Arquiteturas Modernas com Spring Boot"
@@ -28,6 +27,39 @@ export default function CleanPortfolio() {
 
     const { scrollYProgress } = useScroll();
     const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
+
+    const navItems = [
+        { id: 'home', icon: LayoutGrid, label: 'Início' },
+        { id: 'experience', icon: Briefcase, label: 'Exp.' },
+        { id: 'stack', icon: Code, label: 'Stack' },
+        { id: 'education', icon: GraduationCap, label: 'Formação' },
+        { id: 'community', icon: Users, label: 'Canal' },
+    ];
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const currentScroll = window.scrollY;
+            const scrollPosition = currentScroll + 300;
+
+            // 1. Scroll Spy para navegação
+            for (const item of navItems) {
+                const element = document.getElementById(item.id);
+                if (element && element.offsetTop <= scrollPosition && (element.offsetTop + element.offsetHeight) > scrollPosition) {
+                    setActiveSection(item.id);
+                }
+            }
+
+            // 2. Lógica do Botão Flutuante (Aparece após 400px)
+            if (currentScroll > 400) {
+                setShowEmailBtn(true);
+            } else {
+                setShowEmailBtn(false);
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     useEffect(() => {
         const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
@@ -37,16 +69,12 @@ export default function CleanPortfolio() {
         return () => mediaQuery.removeEventListener('change', handleChange);
     }, []);
 
-    // --- LÓGICA DE INTEGRAÇÃO ---
     useEffect(() => {
         const fetchLatestVideo = async () => {
             try {
-                // Chama a NOSSA rota interna (que chama o Java)
                 const res = await fetch('/api/video');
-
                 if (res.ok) {
                     const data = await res.json();
-                    // Se voltou um ID válido, atualiza o estado
                     if (data.id) {
                         setFeaturedVideo({
                             id: data.id,
@@ -58,12 +86,123 @@ export default function CleanPortfolio() {
                 console.error("Usando vídeo padrão (API offline):", error);
             }
         };
-
         fetchLatestVideo();
     }, []);
-    // ---------------------------
 
     const toggleTheme = () => setDarkMode(!darkMode);
+
+    const scrollToSection = (id: string) => {
+        const element = document.getElementById(id);
+        if (element) {
+            window.scrollTo({
+                top: element.offsetTop - 40, // Ajuste fino já que não tem mais header
+                behavior: 'smooth'
+            });
+        }
+    };
+
+    // --- SIDEBAR DESKTOP ---
+    const SidebarNav = () => (
+        <nav className="hidden xl:flex fixed right-8 top-1/2 -translate-y-1/2 z-40 flex-col gap-3 p-4 rounded-2xl bg-white/50 dark:bg-slate-900/50 backdrop-blur-md border border-slate-200 dark:border-slate-800 shadow-lg w-16 items-center transition-all hover:w-48 group overflow-hidden">
+            {navItems.map((item) => (
+                <button
+                    key={item.id}
+                    onClick={() => scrollToSection(item.id)}
+                    className={`flex items-center gap-3 w-full p-2 rounded-xl transition-all relative ${
+                        activeSection === item.id
+                            ? 'text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/20'
+                            : 'text-slate-400 hover:text-slate-600 dark:hover:text-slate-200'
+                    }`}
+                >
+                    <div className="relative z-10 flex-shrink-0">
+                        <item.icon size={20} strokeWidth={activeSection === item.id ? 2.5 : 2} />
+                    </div>
+                    <span className={`text-sm font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute left-12 ${activeSection === item.id ? 'font-bold' : ''}`}>
+                        {item.label}
+                    </span>
+                    {activeSection === item.id && (
+                        <motion.div layoutId="activeIndicatorDesktop" className="absolute left-0 w-1 h-6 bg-indigo-600 rounded-r-full"/>
+                    )}
+                </button>
+            ))}
+
+            {/* Separador */}
+            <div className="w-full h-px bg-slate-200 dark:bg-slate-700 my-1" />
+
+            {/* Botão de Tema */}
+            <button
+                onClick={toggleTheme}
+                className="flex items-center gap-3 w-full p-2 rounded-xl transition-all text-slate-400 hover:text-amber-500 hover:bg-amber-50 dark:hover:bg-amber-900/20 relative"
+            >
+                <div className="relative z-10 flex-shrink-0">
+                    {darkMode ? <Sun size={20} /> : <Moon size={20} />}
+                </div>
+                <span className="text-sm font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute left-12">
+                    {darkMode ? 'Light Mode' : 'Dark Mode'}
+                </span>
+            </button>
+
+            {/* Botão de CV */}
+            <a
+                href="/davidson_linhares.pdf"
+                download
+                className="flex items-center gap-3 w-full p-2 rounded-xl transition-all text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 relative"
+            >
+                <div className="relative z-10 flex-shrink-0">
+                    <Download size={20} />
+                </div>
+                <span className="text-sm font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute left-12">
+                    Download CV
+                </span>
+            </a>
+        </nav>
+    );
+
+    // --- NAVBAR MOBILE ---
+    const MobileNav = () => (
+        <nav className="fixed bottom-0 left-0 right-0 z-50 bg-white/90 dark:bg-slate-950/90 backdrop-blur-lg border-t border-slate-200 dark:border-slate-800 xl:hidden pb-safe">
+            <div className="flex justify-between items-center h-16 px-4">
+
+                {/* Links de Navegação */}
+                <div className="flex justify-around flex-1">
+                    {navItems.map((item) => (
+                        <button
+                            key={item.id}
+                            onClick={() => scrollToSection(item.id)}
+                            className={`flex flex-col items-center justify-center w-full h-full gap-1 transition-colors relative ${
+                                activeSection === item.id
+                                    ? 'text-indigo-600 dark:text-indigo-400'
+                                    : 'text-slate-400 dark:text-slate-500'
+                            }`}
+                        >
+                            {activeSection === item.id && (
+                                <motion.div
+                                    layoutId="activeIndicatorMobile"
+                                    className="absolute top-0 w-8 h-1 bg-indigo-600 rounded-b-full"
+                                />
+                            )}
+                            <item.icon size={20} strokeWidth={activeSection === item.id ? 2.5 : 2} />
+                            <span className="text-[10px] font-medium">{item.label}</span>
+                        </button>
+                    ))}
+                </div>
+
+                {/* Divisória Vertical */}
+                <div className="h-8 w-px bg-slate-200 dark:bg-slate-700 mx-2"></div>
+
+                {/* Ações Extras (Tema e CV) */}
+                <div className="flex gap-3 items-center pl-1">
+                    <button onClick={toggleTheme} className="text-slate-400 hover:text-amber-500 transition-colors">
+                        {darkMode ? <Sun size={20} /> : <Moon size={20} />}
+                    </button>
+                    <a href="/davidson_linhares.pdf" download className="text-slate-400 hover:text-emerald-500 transition-colors">
+                        <Download size={20} />
+                    </a>
+                </div>
+
+            </div>
+        </nav>
+    );
 
     return (
         <div className={darkMode ? 'dark' : ''}>
@@ -71,27 +210,32 @@ export default function CleanPortfolio() {
 
                 <motion.div className="fixed top-0 left-0 right-0 h-1 bg-indigo-600 z-[100] origin-left" style={{ scaleX }} />
 
-                <nav className="sticky top-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
-                    <div className="container mx-auto px-6 h-16 flex items-center justify-between max-w-5xl">
-                        <div className="font-bold text-xl tracking-tight text-slate-900 dark:text-white flex items-center gap-2">
-                            <img src="/logo.png" alt="Logo" className="w-8 h-8 md:w-10 md:h-10 object-contain" onError={(e) => { e.currentTarget.style.display = 'none'; e.currentTarget.nextElementSibling?.classList.remove('hidden'); }} />
-                            <div className="hidden w-8 h-8 bg-indigo-600 rounded-lg items-center justify-center text-white font-mono">DL</div>
-                            <span className="hidden sm:block">{resumeData.name}</span>
-                        </div>
-                        <div className="flex items-center gap-4">
-                            <button onClick={toggleTheme} className="p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors">
-                                {darkMode ? <Sun size={20} /> : <Moon size={20} />}
-                            </button>
-                            <a href="/davidson_linhares.pdf" download className="px-4 py-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-sm font-medium rounded-lg hover:opacity-90 transition-opacity flex items-center gap-2">
-                                <Download size={16} /> <span className="hidden sm:inline">CV</span>
-                            </a>
-                        </div>
-                    </div>
-                </nav>
+                <SidebarNav />
+                <MobileNav />
 
-                <main className="relative z-10">
-                    <HeroSection darkMode={darkMode} />
-                    <TechCarousel />
+                {/* Botão Flutuante de Email */}
+                <AnimatePresence>
+                    {showEmailBtn && (
+                        <motion.a
+                            href={`mailto:${resumeData.contact.email}`}
+                            initial={{ opacity: 0, scale: 0, y: 20 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            exit={{ opacity: 0, scale: 0, y: 20 }}
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.9 }}
+                            className="fixed bottom-20 right-4 xl:bottom-8 xl:right-8 z-40 p-4 bg-indigo-600 hover:bg-indigo-700 text-white rounded-full shadow-lg shadow-indigo-600/30 transition-colors flex items-center justify-center"
+                            aria-label="Enviar Email"
+                        >
+                            <Mail size={24} />
+                        </motion.a>
+                    )}
+                </AnimatePresence>
+
+                <main className="relative z-10 pt-10 md:pt-0"> {/* Pequeno padding top no mobile pois removemos o header */}
+                    <div id="home">
+                        <HeroSection darkMode={darkMode} />
+                        <TechCarousel />
+                    </div>
 
                     <div className="container mx-auto px-6 max-w-5xl mt-20">
                         {/* Stats */}
@@ -109,7 +253,7 @@ export default function CleanPortfolio() {
                         </motion.div>
 
                         {/* Experiência */}
-                        <section className="mb-20">
+                        <section id="experience" className="mb-20 scroll-mt-24">
                             <div className="flex items-center gap-3 mb-8">
                                 <div className="p-2 bg-indigo-100 dark:bg-indigo-900/30 rounded-lg text-indigo-600 dark:text-indigo-400"><Briefcase size={24} /></div>
                                 <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Experiência Profissional</h2>
@@ -120,7 +264,7 @@ export default function CleanPortfolio() {
                         </section>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-20">
-                            <section>
+                            <section id="stack" className="scroll-mt-24">
                                 <div className="flex items-center gap-3 mb-8">
                                     <div className="p-2 bg-indigo-100 dark:bg-indigo-900/30 rounded-lg text-indigo-600 dark:text-indigo-400"><Code size={24} /></div>
                                     <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Stack Tecnológica</h2>
@@ -129,7 +273,7 @@ export default function CleanPortfolio() {
                                     {resumeData.skills.map((skill, index) => <SkillBar key={index} skill={skill} delay={index} />)}
                                 </div>
                             </section>
-                            <section>
+                            <section id="education" className="scroll-mt-24">
                                 <div className="flex items-center gap-3 mb-8">
                                     <div className="p-2 bg-indigo-100 dark:bg-indigo-900/30 rounded-lg text-indigo-600 dark:text-indigo-400"><GraduationCap size={24} /></div>
                                     <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Formação Acadêmica</h2>
@@ -154,7 +298,7 @@ export default function CleanPortfolio() {
                         </div>
 
                         {/* Comunidade */}
-                        <section className="mb-20">
+                        <section id="community" className="mb-20 scroll-mt-24">
                             <div className="flex items-center gap-3 mb-8">
                                 <div className="p-2 bg-indigo-100 dark:bg-indigo-900/30 rounded-lg text-indigo-600 dark:text-indigo-400"><Users size={24} /></div>
                                 <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Comunidade</h2>
@@ -185,7 +329,7 @@ export default function CleanPortfolio() {
                             </div>
                         </section>
 
-                        <footer className="border-t border-slate-200 dark:border-slate-800 pt-8 pb-12 text-center md:text-left text-slate-500 text-sm flex flex-col md:flex-row justify-between items-center">
+                        <footer className="border-t border-slate-200 dark:border-slate-800 pt-8 pb-24 md:pb-12 text-center md:text-left text-slate-500 text-sm flex flex-col md:flex-row justify-between items-center">
                             <p>© 2025 {resumeData.name}. Construído com Next.js & Tailwind.</p>
                             <div className="flex gap-4 mt-4 md:mt-0">
                                 <a href={resumeData.contact.linkedin} className="hover:text-indigo-600 transition-colors">Linkedin</a>

@@ -57,7 +57,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ darkMode }) => {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="flex-1 text-center md:text-left"
         >
-          <div className="inline-block px-3 py-1 mb-4 text-xs font-semibold tracking-wider text-indigo-600 uppercase bg-indigo-50 dark:bg-indigo-900/20 rounded-full">
+          <div className="inline-block px-3 py-1 mb-4 text-base font-semibold tracking-wider text-indigo-600 uppercase bg-indigo-50 dark:bg-indigo-900/20 rounded-full">
             Engenheiro de Software Backend
           </div>
           <h1 className="text-4xl md:text-6xl font-extrabold text-slate-900 dark:text-white mb-6 leading-tight">
