@@ -58,11 +58,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ darkMode }) => {
           className="flex-1 text-center md:text-left"
         >
           <div className="inline-block px-3 py-1 mb-4 text-base font-semibold tracking-wider text-indigo-600 uppercase bg-indigo-50 dark:bg-indigo-900/20 rounded-full">
-            Engenheiro de Software Backend
+            AI Software Engineer
           </div>
           <h1 className="text-4xl md:text-6xl font-extrabold text-slate-900 dark:text-white mb-6 leading-tight">
-            Construindo soluções <br/>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-violet-600">escaláveis e robustas</span>.
+            Construindo sistemas inteligentes<br/>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-violet-600">escaláveis e prontos para produção</span>
           </h1>
           <p className="text-lg text-slate-600 dark:text-slate-300 mb-8 leading-relaxed text-justify">
             {resumeData.summary}
