@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { Download, Moon, Sun, Briefcase, Code, GraduationCap, Globe, Users, Play, LayoutGrid, Mail, Server, Database, Cloud, AppWindow, BookOpen } from 'lucide-react';
+import { Download, Moon, Sun, Briefcase, Code, GraduationCap, Globe, Users, Play, LayoutGrid, Mail, Server, Database, Cloud, AppWindow, BookOpen, Brain, Sigma } from 'lucide-react';
 import { motion, useScroll, useSpring, AnimatePresence } from 'framer-motion';
 
 import { resumeData } from '@/data/resume';
@@ -35,28 +35,80 @@ export default function CleanPortfolio() {
         { id: 'community', icon: Users, label: 'Comunidade' },
     ];
 
-    const techStack = [
-        {
-            category: "Backend & Core",
-            icon: Server,
-            skills: ["Java", "Spring Framework", "RESTfull APIS"]
-        },
-        {
-            category: "Banco de Dados",
-            icon: Database,
-            skills: ["PostgreSQL", "SQL", "JPA / Hibernate", "Redis"]
-        },
-        {
-            category: "DevOps & Cloud",
-            icon: Cloud,
-            skills: ["AWS (EC2/S3)", "Docker", "CI/CD", "Terraform", "Linux"]
-        },
-        {
-            category: "Frontend & Web",
-            icon: AppWindow,
-            skills: ["Angular", "TypeScript", "Next.js", "Tailwind CSS"]
-        }
-    ];
+const techStack = [
+    {
+        category: "Backend & Arquitetura",
+        icon: Server,
+        skills: [
+            "Java",
+            "Spring Boot",
+            "Spring Security",
+            "Arquitetura em Camadas",
+            "Modular Monolith (por feature)",
+            "Microsserviços",
+            "RESTful APIs"
+        ]
+    },
+    {
+        category: "Machine Learning & IA",
+        icon: Brain,
+        skills: [
+            "Python",
+            "Scikit-Learn",
+            "Pandas",
+            "NumPy",
+            "EDA (Exploratory Data Analysis)",
+            "Modelos Supervisionados",
+            "Modelos Não Supervisionados",
+            "Ensemble Learning (Random Forest, Boosting)",
+            "PCA & Redução de Dimensionalidade"
+        ]
+    },
+    {
+        category: "Matemática & Estatística Aplicada",
+        icon: Sigma,
+        skills: [
+            "Estatística Descritiva",
+            "Probabilidade",
+            "Álgebra Linear",
+            "Cálculo",
+            "Validação Cruzada",
+            "Métricas de Avaliação de Modelos"
+        ]
+    },
+    {
+        category: "Banco de Dados & Cache",
+        icon: Database,
+        skills: [
+            "PostgreSQL",
+            "SQL",
+            "JPA / Hibernate",
+            "Redis"
+        ]
+    },
+    {
+        category: "Cloud, DevOps & MLOps",
+        icon: Cloud,
+        skills: [
+            "AWS (EC2, S3)",
+            "Docker",
+            "CI/CD",
+            "Terraform",
+            "Linux",
+            "Deploy de Modelos via API"
+        ]
+    },
+    {
+        category: "Frontend & Integração",
+        icon: AppWindow,
+        skills: [
+            "Angular",
+            "TypeScript",
+            "Next.js",
+            "Tailwind CSS"
+        ]
+    }
+];
 
     useEffect(() => {
         const handleScroll = () => {

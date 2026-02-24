@@ -10,7 +10,7 @@ export const resumeData: ResumeData = {
     linkedin: "https://www.linkedin.com/in/davidson-linhares",
     github: "https://github.com/DavJaveiro"
   },
-  summary: "Sou Desenvolvedor Backend Java focado em criar soluções estáveis, escaláveis e preparadas para ambientes de produção. Tenho experiência com o ecossistema Spring Framework, APIs REST, microsserviços, bancos de dados relacionais e práticas essenciais de DevOps. Atualmente, estou ampliando minhas competências em Cloud Computing (AWS) e Terraform.",
+  summary: "Sou AI Software Engineer com forte base em desenvolvimento Backend Java, construindo sistemas robustos, escaláveis e preparados para produção. Minha trajetória combina Engenharia de Software, Matemática e formação prévia em Biologia, o que me proporcionou uma visão analítica sobre sistemas complexos e sua evolução. Atuo com Java e o ecossistema Spring no desenvolvimento de APIs REST, trabalhando com diferentes modelos arquiteturais, como arquitetura em camadas, modular monolith (organização por feature) e microsserviços, sempre com foco em sustentabilidade, confiabilidade e crescimento contínuo. Venho ampliando minha atuação na integração de Machine Learning a aplicações reais e no uso de AWS, Docker, CI/CD e Infraestrutura como Código, com o objetivo de desenvolver sistemas inteligentes, bem estruturados e preparados para evoluir com segurança",
   skills: [
     { name: 'Java / Spring Boot', level: 95 },
     { name: 'APIs REST / Microservices', level: 90 },
@@ -81,7 +81,7 @@ export const resumeData: ResumeData = {
       {
           school: "Universidade Federal do Rio de Janeiro",
           course: "Licenciatura em Ciências Biológicas",
-          period: "2018 - 2024",
+          period: "2018 - 2024 (Concluída)",
           logo: "/university/ufrj-logo.png"
       }
 
