@@ -32,7 +32,7 @@ export default function CleanPortfolio() {
         { id: 'experience', icon: Briefcase, label: 'Exp.' },
         { id: 'stack', icon: Code, label: 'Stack' },
         { id: 'education', icon: GraduationCap, label: 'Formação' },
-        { id: 'community', icon: Users, label: 'Canal' },
+        { id: 'community', icon: Users, label: 'Comunidade' },
     ];
 
     const techStack = [
