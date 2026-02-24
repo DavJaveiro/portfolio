@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { Download, Moon, Sun, Briefcase, Code, GraduationCap, Globe, Users, Play, Youtube, LayoutGrid, Mail, Server, Database, Cloud, AppWindow } from 'lucide-react';
+import { Download, Moon, Sun, Briefcase, Code, GraduationCap, Globe, Users, Play, LayoutGrid, Mail, Server, Database, Cloud, AppWindow, BookOpen } from 'lucide-react';
 import { motion, useScroll, useSpring, AnimatePresence } from 'framer-motion';
 
 import { resumeData } from '@/data/resume';
@@ -327,23 +327,33 @@ export default function CleanPortfolio() {
                         </section>
 
                         {/* Comunidade (MANTIDA ORIGINALMENTE) */}
+{/* Comunidade */}
                         <section id="community" className="mb-20 scroll-mt-24">
                             <div className="flex items-center gap-3 mb-8">
-                                <div className="p-2 bg-indigo-100 dark:bg-indigo-900/30 rounded-lg text-indigo-600 dark:text-indigo-400"><Users size={24} /></div>
-                                <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Comunidade</h2>
+                                <div className="p-2 bg-indigo-100 dark:bg-indigo-900/30 rounded-lg text-indigo-600 dark:text-indigo-400">
+                                    <Users size={24} />
+                                </div>
+                                <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Comunidade & Conteúdo</h2>
                             </div>
 
                             <div className="flex flex-col gap-6">
+                                
+                                {/* 1. CARD DO YOUTUBE (O que você já tinha) */}
                                 <div className="w-full bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 p-6 shadow-sm">
                                     <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-4">
                                         <div className="flex items-center gap-3">
-                                            <div className="p-2 bg-red-100 dark:bg-red-900/20 rounded-lg text-red-600 dark:text-red-500"><Play size={20} fill="currentColor" /></div>
+                                            <div className="p-2 bg-red-100 dark:bg-red-900/20 rounded-lg text-red-600 dark:text-red-500">
+                                                <Play size={20} fill="currentColor" />
+                                            </div>
                                             <div>
-                                                <p className="text-xs text-slate-500 dark:text-slate-400">No meu canal, eu exploro o ecossistema Java e Spring Boot a fundo, traduzindo conceitos complexos de backend, microsserviços e cloud para aplicações do mundo real.
+                                                <p className="text-xs text-slate-500 dark:text-slate-400">
+                                                    No meu canal, eu exploro o ecossistema Java e Spring Boot a fundo, traduzindo conceitos complexos de backend, microsserviços e cloud para aplicações do mundo real.
                                                 </p>
                                             </div>
                                         </div>
-                                        <a href="https://www.youtube.com/@DavJaveiro?sub_confirmation=1" target="_blank" rel="noopener noreferrer" className="text-xs font-bold text-white bg-red-600 hover:bg-red-700 py-2 px-4 rounded-lg text-center transition-colors shadow-sm w-full sm:w-auto">Inscrever-se</a>
+                                        <a href="https://www.youtube.com/@DavJaveiro?sub_confirmation=1" target="_blank" rel="noopener noreferrer" className="text-xs font-bold text-white bg-red-600 hover:bg-red-700 py-2 px-4 rounded-lg text-center transition-colors shadow-sm w-full sm:w-auto">
+                                            Inscrever-se
+                                        </a>
                                     </div>
 
                                     <div className="relative w-full aspect-video rounded-xl overflow-hidden bg-slate-900 shadow-lg border-2 border-slate-100 dark:border-slate-700">
@@ -351,6 +361,26 @@ export default function CleanPortfolio() {
                                     </div>
                                     <h4 className="mt-4 font-semibold text-slate-900 dark:text-white text-base leading-tight">{featuredVideo.title}</h4>
                                 </div>
+
+                                {/* 2. NOVO: CARD DO BLOG */}
+                                <div className="w-full bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 p-6 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                                    <div className="flex items-center gap-4">
+                                        <div className="p-3 bg-emerald-100 dark:bg-emerald-900/20 rounded-lg text-emerald-600 dark:text-emerald-500 flex-shrink-0">
+                                            <BookOpen size={24} />
+                                        </div>
+                                        <div>
+                                            <h3 className="text-lg font-bold text-slate-900 dark:text-white">Blog & Artigos</h3>
+                                            <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
+                                                Compartilho artigos, tutoriais de estudo e aprofundamentos técnicos sobre desenvolvimento, matemática e inteligência artificial.
+                                            </p>
+                                        </div>
+                                    </div>
+                                    {/* ATENÇÃO: Substitua o href abaixo pelo link real do seu blog (Medium, Dev.to, Hashnode, etc) */}
+                                    <a href="LINK_DO_SEU_BLOG_AQUI" target="_blank" rel="noopener noreferrer" className="text-sm font-bold text-white bg-emerald-600 hover:bg-emerald-700 py-2.5 px-5 rounded-lg text-center transition-colors shadow-sm w-full sm:w-auto whitespace-nowrap">
+                                        Acessar Blog
+                                    </a>
+                                </div>
+
                             </div>
                         </section>
 
