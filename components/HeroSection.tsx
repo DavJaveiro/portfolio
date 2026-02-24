@@ -14,7 +14,7 @@ interface HeroSectionProps {
 
 export const HeroSection: React.FC<HeroSectionProps> = ({ darkMode }) => {
   return (
-    <section className="relative pt-20 pb-24 md:pt-28 md:pb-8 overflow-hidden mb-2">
+    <section className="relative pt-20 pb-24 md:pt-12 md:pb-8 overflow-hidden mb-2">
       <div className="absolute top-0 inset-x-0 h-full w-full -z-10 transform-gpu overflow-hidden blur-3xl" aria-hidden="true">
         <div 
           className={`relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem] 
@@ -57,10 +57,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ darkMode }) => {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="flex-1 text-center md:text-left"
         >
-          <div className="inline-block px-3 py-1 mb-4 text-base font-semibold tracking-wider text-indigo-600 uppercase bg-indigo-50 dark:bg-indigo-900/20 rounded-full">
+          <div className="inline-block px-3 py-1 mb-3 text-base font-semibold tracking-wider text-indigo-600 uppercase bg-indigo-50 dark:bg-indigo-900/20 rounded-full">
             AI Software Engineer
           </div>
-          <h1 className="text-4xl md:text-6xl font-extrabold text-slate-900 dark:text-white mb-6 leading-tight">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white mb-6 leading-tight">
             Construindo sistemas inteligentes<br/>
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-violet-600">escaláveis e prontos para produção</span>
           </h1>
